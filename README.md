@@ -9,6 +9,7 @@
    - `GenericRepository`: Repository 
    - `PostgreSQLRepository`: PostgreSQL 사용을 위한 Repository
 
-### 0.1.1 - 20211227
+### 0.1.1-SNAPSHOT - 20211227
  + JdbcUtils 추가
    - nullable setter/getter 추가 
+   - `getColumnsStartsWith` 추가
