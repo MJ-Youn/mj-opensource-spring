@@ -33,8 +33,10 @@ public abstract class GenericRepository {
     private JdbcTemplate jdbcTemplate;
 
     /**
-     * @param jdbcTemplate JdbcTemplate
-     * @param messageSource Query를 properties로 부터 가져오기 위한 Message Source
+     * @param jdbcTemplate
+     *            JdbcTemplate
+     * @param messageSource
+     *            Query를 properties로 부터 가져오기 위한 Message Source
      * 
      * @author MJ Youn
      * @since 2021. 12. 27.

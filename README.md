@@ -13,3 +13,6 @@
  + JdbcUtils 추가
    - nullable setter/getter 추가 
    - `getColumnsStartsWith` 추가
+
+### 0.1.1-SNAPSHOT - 20211228
+ + GenericService 추가
