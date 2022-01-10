@@ -53,7 +53,8 @@ public class ListResultConverter<R extends Result<List<T>>, T> {
      * 정렬 함수. {@link Result}에 들어있는 {@link List}정보를 정렬 조건 {@link Comparator}에 맞춰 정렬한다.
      * 
      * @param comp
-     * @return
+     *            비교 함수
+     * @return 정렬된 결과 정보
      * 
      * @author MJ Youn
      * @since 2021. 12. 28.

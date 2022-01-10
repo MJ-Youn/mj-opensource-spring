@@ -16,3 +16,6 @@
 
 ### 0.1.1-SNAPSHOT - 20211228
  + GenericService 추가
+
+### 0.1.2 - 20220110
++ optional validation 기능 추가
