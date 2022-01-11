@@ -19,3 +19,17 @@
 
 ### 0.1.2 - 20220110
 + optional validation 기능 추가
+
+### 0.1.3 - 20220110
++ GenericRepository 고도화
+  - Parameter Map을 통한 데이터 조회 기능 개발 
+
+### 0.1.4 - 20220111
++ ListResultConverter 고도화
+  - page 변환 함수 추가 
+
+### 0.1.5 - 20220111
++ GenericRepository 오류 수정
+
+### 0.1.5-SNAPSHOT - 20220111
++ GenericRepository 오류 수정

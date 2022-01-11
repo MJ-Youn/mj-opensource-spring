@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import io.github.mjyoun.core.data.Result;
 import io.github.mjyoun.spring.entity.GenericEntity;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * {@link JdbcTemplate} 사용을 위한 repository
@@ -25,6 +26,7 @@ import io.github.mjyoun.spring.entity.GenericEntity;
  * @author MJ Youn
  * @since 2021. 12. 27.
  */
+@Slf4j
 public abstract class GenericRepository {
 
     /** Query를 properties로 부터 가져오기 위한 Message Source */
@@ -108,7 +110,11 @@ public abstract class GenericRepository {
      * @since 2021. 12. 27.
      */
     protected <T extends GenericEntity<T>> Result<List<T>> findAllWithPage(Class<T> t, String sql, Pageable pageable, Object... args) {
-        StringBuffer sb = new StringBuffer().append(sql).append(this.createPagenationQuery(pageable));
+        StringBuffer sb = new StringBuffer() //
+                .append(sql) //
+                .append(this.createPagenationQuery(pageable));
+
+        log.debug("Pageable: {}", this.createPagenationQuery(pageable));
 
         return this.findAll(t, sb.toString(), args);
     }
@@ -168,6 +174,80 @@ public abstract class GenericRepository {
         dataMap.put(dataColumn, datas);
 
         return Result.ok(namedParameterJdbcTemplate.query(sql, dataMap, this.getRowMapper(t)));
+    }
+
+    /**
+     * parameter map을 갖고 DB 조회를 요청하는 함수
+     * 
+     * @param <T>
+     *            GenericEntity를 상속받은 Entity
+     * @param t
+     *            GenericEntity를 상속받은 Entity 클래스
+     * @param sql
+     *            실행 query
+     * @param paramsMap
+     *            query 조회 parameter map
+     * @return query 실행 결과
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 10.
+     */
+    protected <T extends GenericEntity<T>, P> Result<List<T>> findAllInDatas(Class<T> t, String sql, Map<String, List<P>> paramsMap) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(this.jdbcTemplate.getDataSource());
+
+        return Result.ok(namedParameterJdbcTemplate.query(sql, paramsMap, this.getRowMapper(t)));
+    }
+
+    /**
+     * parameter map을 갖고 DB 조회를 요청하는 함수
+     * 
+     * @param <T>
+     *            GenericEntity를 상속받은 Entity
+     * @param t
+     *            GenericEntity를 상속받은 Entity 클래스
+     * @param sql
+     *            실행 query
+     * @param paramsMap
+     *            query 조회 parameter map
+     * @param pageable
+     *            페이지네이션 정보
+     * @return query 실행 결과
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 10.
+     */
+    protected <T extends GenericEntity<T>, P> Result<List<T>> findAllInDatas(Class<T> t, String sql, Map<String, List<P>> paramsMap,
+            Pageable pageable) {
+        String queryWithPageable = new StringBuffer() //
+                .append(sql) //
+                .append(this.createPagenationQuery(pageable)) //
+                .toString();
+
+        log.debug("Pageable: {}", this.createPagenationQuery(pageable));
+
+        return this.findAllInDatas(t, queryWithPageable, paramsMap);
+    }
+
+    /**
+     * parameter map을 갖고 DB 조회 결과를 Integer로 받는 함수
+     * 
+     * @param <R>
+     *            Return 타입
+     * @param <P>
+     *            Parameter 타입
+     * @param sql
+     *            실행 query
+     * @param paramsMap
+     *            query 조회 parameter map
+     * @return query 실행 결과
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 10.
+     */
+    protected <R, P> Result<R> executeWithParams(String sql, Map<String, List<P>> paramsMap, Class<R> returnType) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(this.jdbcTemplate.getDataSource());
+
+        return Result.ok(namedParameterJdbcTemplate.queryForObject(sql, paramsMap, returnType));
     }
 
     /**

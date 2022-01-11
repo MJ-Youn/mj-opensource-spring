@@ -110,6 +110,9 @@ public class ListResultConverter<R extends Result<List<T>>, T> {
      * @param totalCntFunc
      *            전체 페이지 개수를 계산하기 위한 함수
      * @return {@link PageResultConverter}
+     * 
+     * @author MJ Youn
+     * @since 2021. 12. 28.
      */
     public PageResultConverter<Result<Page<T>>, T> toPage(@NotNull Pageable pageable, @NotNull Supplier<Long> totalCntFunc) {
         if (this.result.isResult()) {
@@ -118,6 +121,31 @@ public class ListResultConverter<R extends Result<List<T>>, T> {
             }
 
             Page<T> page = new PageImpl<>(this.result.getData(), pageable, totalCntFunc.get());
+            return PageResultConverter.of(Result.ok(page));
+        } else {
+            return PageResultConverter.of(Result.error(this.result));
+        }
+    }
+
+    /**
+     * 리스트 형태의 {@link ListResultConverter}를 페이지 형태인 {@link PageResultConverter}로 변환하는 함수.
+     * 
+     * @param pageable
+     *            페이지 정보
+     * @param totalCnt
+     *            전체 페이지 개수
+     * @return {@link PageResultConverter}
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 11.
+     */
+    public PageResultConverter<Result<Page<T>>, T> toPage(@NotNull Pageable pageable, Long totalCnt) {
+        if (this.result.isResult()) {
+            if (this.result.getData() == null) {
+                throw new NullPointerException("결과 데이터가 없습니다.");
+            }
+
+            Page<T> page = new PageImpl<>(this.result.getData(), pageable, totalCnt);
             return PageResultConverter.of(Result.ok(page));
         } else {
             return PageResultConverter.of(Result.error(this.result));
