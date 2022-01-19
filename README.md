@@ -33,3 +33,13 @@
 
 ### 0.1.5-SNAPSHOT - 20220111
 + GenericRepository 오류 수정
+
+### 0.1.6 - 20220117
++ 배포를 위한 버전 변경
+
+### 0.1.7 - 20220119
++ GenericRepository 고도화
+
+### 0.1.8 - 20220119
++ JDBCUtils 고도화
+  - inner join 함수 추가 

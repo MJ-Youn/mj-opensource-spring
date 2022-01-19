@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.Min;
@@ -218,6 +219,77 @@ public class JdbcUtils {
         }
 
         return datas;
+    }
+
+    /**
+     * 여러 개의 쿼리로 inner join한 쿼리를 생성하는 함수
+     * 
+     * @param queries
+     *            쿼리 목록
+     * @return inner join한 쿼리
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 19.
+     */
+    public static String innerJoinQuery(List<String> queries) {
+        String query = null;
+
+        if (queries == null || queries.size() < 1) {
+            throw new IllegalArgumentException("하나 이상의 query가 있어야 join을 할 수 있습니다.");
+        } else if (queries.size() == 1) {
+            query = queries.get(0);
+        } else {
+            StringBuilder sb = new StringBuilder() //
+                    .append("SELECT t_0.* FROM (") //
+                    .append("(").append(queries.get(0)).append(") t_0");
+
+            for (int i = 1; i < queries.size(); i++) {
+                sb.append(" INNER JOIN (").append(queries.get(i)).append(") t_").append(i) //
+                        .append(" ON t_").append(i - 1).append(".id = t_").append(i).append(".id");
+            }
+
+            sb.append(")");
+            query = sb.toString();
+        }
+
+        return query;
+    }
+
+    /**
+     * 여러 개의 쿼리로 inner join하여 개수를 세는 쿼리를 생성하는 함수
+     * 
+     * @param queries
+     *            쿼리 목록
+     * @return inner join한 쿼리
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 19.
+     */
+    public static String innerJoinCountQuery(List<String> queries) {
+        String query = null;
+
+        if (queries == null || queries.size() < 1) {
+            throw new IllegalArgumentException("하나 이상의 query가 있어야 join을 할 수 있습니다.");
+        } else if (queries.size() == 1) {
+            query = new StringBuilder("SELECT COUNT(*) FROM (") //
+                    .append(queries.get(0)) //
+                    .append(") t_0") //
+                    .toString();
+        } else {
+            StringBuilder sb = new StringBuilder() //
+                    .append("SELECT COUNT(t_0.*) FROM (") //
+                    .append("(").append(queries.get(0)).append(") t_0");
+
+            for (int i = 1; i < queries.size(); i++) {
+                sb.append(" INNER JOIN (").append(queries.get(i)).append(") t_").append(i) //
+                        .append(" ON t_").append(i - 1).append(".id = t_").append(i).append(".id");
+            }
+
+            sb.append(")");
+            query = sb.toString();
+        }
+
+        return query;
     }
 
 }

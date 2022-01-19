@@ -181,6 +181,8 @@ public abstract class GenericRepository {
      * 
      * @param <T>
      *            GenericEntity를 상속받은 Entity
+     * @param <P>
+     *            parameter map의 value 타입
      * @param t
      *            GenericEntity를 상속받은 Entity 클래스
      * @param sql
@@ -203,6 +205,8 @@ public abstract class GenericRepository {
      * 
      * @param <T>
      *            GenericEntity를 상속받은 Entity
+     * @param <P>
+     *            parameter map의 value 타입
      * @param t
      *            GenericEntity를 상속받은 Entity 클래스
      * @param sql
@@ -226,6 +230,61 @@ public abstract class GenericRepository {
         log.debug("Pageable: {}", this.createPagenationQuery(pageable));
 
         return this.findAllInDatas(t, queryWithPageable, paramsMap);
+    }
+
+    /**
+     * parameter map을 갖고 DB 조회를 요청하는 함수
+     * 
+     * @param <K>
+     *            출력할 데이터 타입
+     * @param <P>
+     *            parameter map의 value 타입
+     * @param k
+     *            출력할 데이터의 class
+     * @param sql
+     *            실행 query
+     * @param paramsMap
+     *            query 조회 parameter map
+     * @return query 실행한 아이디 목록 결과
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 19.
+     */
+    protected <K, P> Result<List<K>> findAllIdInDatas(Class<K> k, String sql, Map<String, List<P>> paramsMap) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(this.jdbcTemplate.getDataSource());
+
+        return Result.ok(namedParameterJdbcTemplate.queryForList(sql, paramsMap, k));
+    }
+
+    /**
+     * parameter map을 갖고 DB 조회를 요청하는 함수
+     * 
+     * @param <K>
+     *            출력할 데이터 타입
+     * @param <P>
+     *            parameter map의 value 타입
+     * @param k
+     *            출력할 데이터의 class
+     * @param sql
+     *            실행 query
+     * @param paramsMap
+     *            query 조회 parameter map
+     * @param pageable
+     *            페이지네이션 정보
+     * @return query 실행한 아이디 목록 결과
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 19.
+     */
+    protected <K, P> Result<List<K>> findAllIdInDatas(Class<K> k, String sql, Map<String, List<P>> paramsMap, Pageable pageable) {
+        String queryWithPageable = new StringBuffer() //
+                .append(sql) //
+                .append(this.createPagenationQuery(pageable)) //
+                .toString();
+
+        log.debug("Pageable: {}", this.createPagenationQuery(pageable));
+
+        return this.findAllIdInDatas(k, queryWithPageable, paramsMap);
     }
 
     /**
