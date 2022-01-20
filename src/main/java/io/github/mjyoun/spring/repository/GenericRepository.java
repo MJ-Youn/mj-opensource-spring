@@ -334,6 +334,30 @@ public abstract class GenericRepository {
     }
 
     /**
+     * query 실행 결과를 원하는 Object로 변환하여 출력하는 함수
+     * 
+     * @param <T>
+     *            결과 타입
+     * @param sql
+     *            실행 query
+     * @param t
+     *            결과 타입 class
+     * @param args
+     *            query 실행시 필요한 arguments
+     * @return query 실행 결과
+     * 
+     * @author MJ Youn
+     * @since 2022. 01. 19.
+     */
+    protected <T> Result<T> execute(String sql, Class<T> t, Object... args) {
+        if (args == null || args.length == 0) {
+            return Result.ok(this.jdbcTemplate.queryForObject(sql, t));
+        } else {
+            return Result.ok(this.jdbcTemplate.queryForObject(sql, t, args));
+        }
+    }
+
+    /**
      * 여러 데이터를 하나의 query로 배치 실행하는 함수
      * 
      * @param sql

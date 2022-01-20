@@ -43,3 +43,7 @@
 ### 0.1.8 - 20220119
 + JDBCUtils 고도화
   - inner join 함수 추가 
+
+### 0.1.9 - 20220119
++ GenericRepository 고도화
+  - execute 함수 추가
