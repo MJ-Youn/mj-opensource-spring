@@ -47,3 +47,6 @@
 ### 0.1.9 - 20220119
 + GenericRepository 고도화
   - execute 함수 추가
+
+### 0.2.0 - 20220315
++ MariadbRepository 추가
