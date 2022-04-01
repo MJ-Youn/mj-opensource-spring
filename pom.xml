@@ -10,7 +10,7 @@
 	<groupId>io.github.mj-youn</groupId>
 
 	<artifactId>spring</artifactId>
-	<version>0.2.1</version> <!-- '-SNAPSHOT'으로 끝나면 snapshot, 아닐 경우 release로 배포됨 -->
+	<version>0.2.2</version> <!-- '-SNAPSHOT'으로 끝나면 snapshot, 아닐 경우 release로 배포됨 -->
 
 	<name>io.github.mj-youn.spring</name>
 	<description>A project that organizes frequently used utilities in Spring</description>
@@ -77,7 +77,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.13.1</version>
+			<version>2.13.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>

@@ -53,3 +53,6 @@
 
 ### 0.2.1 - 20220315
 + PageResultConverter에 map() 함수 추가
+
+### 0.2.2 - 20220401
++ jackson library의 버전 문제 수정
