@@ -32,13 +32,24 @@ public class MariadbRepository extends GenericRepository {
     }
 
     /**
-     * @see GenericRepository#createPagenationQuery(Pageable)
+     * @see GenericRepository#createPaginationPreFixQuery()
+     * 
+     * @author MJ Youn
+     * @since 2022. 05. 25.
+     */
+    @Override
+    protected String createPaginationPreFixQuery() {
+        return "";
+    }
+
+    /**
+     * @see GenericRepository#createPagenationPostFixQuery(Pageable)
      * 
      * @author MJ Youn
      * @since 2022. 03. 15.
      */
     @Override
-    protected String createPagenationQuery(Pageable pageable) {
+    protected String createPagenationPostFixQuery(Pageable pageable) {
         StringBuffer sb = new StringBuffer();
 
         // order by 추가

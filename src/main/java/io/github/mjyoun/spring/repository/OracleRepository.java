@@ -8,21 +8,28 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- * PostgreSQL 사용을 위한 Repository
+ * Oracle 사용을 위한 Repository
  * 
  * @author MJ Youn
- * @since 2021. 12. 27.
+ * @since 2022. 05. 25.
  */
-public class PostgreSQLRepository extends GenericRepository {
+public class OracleRepository extends GenericRepository {
+
+    /** pagination 설정을 위한 테이블 이름 */
+    private final String paginationTableName = "pagination_table";
 
     /**
-     * @param jdbcTemplate JdbcTemplate
-     * @param messageSource Query를 properties로 부터 가져오기 위한 Message Source
+     * (non-javadoc)
+     * 
+     * @param jdbcTemplate
+     *            {@link JdbcTemplate}
+     * @param messageSource
+     *            Query를 properties로 부터 가져오기 위한 Message Source
      * 
      * @author MJ Youn
-     * @since 2021. 12. 27.
+     * @since 2022. 05. 25.
      */
-    protected PostgreSQLRepository(JdbcTemplate jdbcTemplate, //
+    protected OracleRepository(JdbcTemplate jdbcTemplate, //
             ReloadableResourceBundleMessageSource messageSource) {
         super(jdbcTemplate, messageSource);
     }
@@ -35,14 +42,18 @@ public class PostgreSQLRepository extends GenericRepository {
      */
     @Override
     protected String createPaginationPreFixQuery() {
-        return "";
+        return new StringBuffer() //
+                .append("SELECT ") //
+                .append(paginationTableName) //
+                .append(".*, ROWNUM FROM ( ") //
+                .toString();
     }
 
     /**
      * @see GenericRepository#createPagenationPostFixQuery(Pageable)
      * 
      * @author MJ Youn
-     * @since 2021. 12. 27.
+     * @since 2022. 05. 25.
      */
     @Override
     protected String createPagenationPostFixQuery(Pageable pageable) {
@@ -57,8 +68,8 @@ public class PostgreSQLRepository extends GenericRepository {
 
                 for (int i = 0; i < orders.size(); i++) {
                     Order order = orders.get(i);
-                    sb //
-                            .append(order.getProperty()) //
+
+                    sb.append("\"").append(order.getProperty()).append("\"") //
                             .append(" ") //
                             .append(order.getDirection().name());
 
@@ -70,11 +81,14 @@ public class PostgreSQLRepository extends GenericRepository {
         }
 
         // pagination 정보 추가
-        sb //
-                .append(" LIMIT ") //
-                .append(pageable.getPageSize()) //
-                .append(" OFFSET ") //
-                .append(pageable.getPageNumber() * pageable.getPageSize());
+        sb.append(" ) ") //
+                .append(paginationTableName) //
+                .append(" WHERE ") //
+                .append("ROWNUM >= ") //
+                .append(pageable.getPageNumber() * pageable.getPageSize()) //
+                .append(" AND ") //
+                .append("ROWNUM < ") //
+                .append((pageable.getPageNumber() + 1) * pageable.getPageSize());
 
         return sb.toString();
     }

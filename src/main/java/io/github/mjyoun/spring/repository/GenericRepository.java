@@ -111,10 +111,11 @@ public abstract class GenericRepository {
      */
     protected <T extends GenericEntity<T>> Result<List<T>> findAllWithPage(Class<T> t, String sql, Pageable pageable, Object... args) {
         StringBuffer sb = new StringBuffer() //
+                .append(this.createPaginationPreFixQuery()) //
                 .append(sql) //
-                .append(this.createPagenationQuery(pageable));
+                .append(this.createPagenationPostFixQuery(pageable));
 
-        log.debug("Pageable: {}", this.createPagenationQuery(pageable));
+        log.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
 
         return this.findAll(t, sb.toString(), args);
     }
@@ -223,11 +224,12 @@ public abstract class GenericRepository {
     protected <T extends GenericEntity<T>, P> Result<List<T>> findAllInDatas(Class<T> t, String sql, Map<String, List<P>> paramsMap,
             Pageable pageable) {
         String queryWithPageable = new StringBuffer() //
+                .append(this.createPaginationPreFixQuery()) //
                 .append(sql) //
-                .append(this.createPagenationQuery(pageable)) //
+                .append(this.createPagenationPostFixQuery(pageable)) //
                 .toString();
 
-        log.debug("Pageable: {}", this.createPagenationQuery(pageable));
+        log.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
 
         return this.findAllInDatas(t, queryWithPageable, paramsMap);
     }
@@ -278,11 +280,12 @@ public abstract class GenericRepository {
      */
     protected <K, P> Result<List<K>> findAllIdInDatas(Class<K> k, String sql, Map<String, List<P>> paramsMap, Pageable pageable) {
         String queryWithPageable = new StringBuffer() //
+                .append(this.createPaginationPreFixQuery()) //
                 .append(sql) //
-                .append(this.createPagenationQuery(pageable)) //
+                .append(this.createPagenationPostFixQuery(pageable)) //
                 .toString();
 
-        log.debug("Pageable: {}", this.createPagenationQuery(pageable));
+        log.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
 
         return this.findAllIdInDatas(k, queryWithPageable, paramsMap);
     }
@@ -468,6 +471,16 @@ public abstract class GenericRepository {
     }
 
     /**
+     * pagination query pre fix
+     * 
+     * @return 검색조건 pre fix
+     * 
+     * @author MJ Youn
+     * @since 2022. 05. 25.
+     */
+    protected abstract String createPaginationPreFixQuery();
+
+    /**
      * {@link Pageable} 정보를 갖고 Query를 생성하는 함수
      * 
      * @param pageable
@@ -477,6 +490,6 @@ public abstract class GenericRepository {
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
-    protected abstract String createPagenationQuery(Pageable pageable);
+    protected abstract String createPagenationPostFixQuery(Pageable pageable);
 
 }
