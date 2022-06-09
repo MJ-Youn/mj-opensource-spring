@@ -56,3 +56,8 @@
 
 ### 0.2.2 - 20220401
 + jackson library의 버전 문제 수정
+
+### 0.2.3 - ?
+
+### 0.2.4 - 20220609
++ ListResultConverter에 iterable converter 추가
