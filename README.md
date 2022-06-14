@@ -61,3 +61,9 @@
 
 ### 0.2.4 - 20220609
 + ListResultConverter에 iterable converter 추가
+
+### 0.2.5 - 20220613
++ validated를 위한 marker class 추가
+
+### 0.2.6 - 20220614
++ validated를 위한 marker class를 interface로 변경
