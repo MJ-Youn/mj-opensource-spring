@@ -54,7 +54,7 @@ public class ListResultConverter<R extends Result<List<T>>, T> {
      * iterable로 생성하는 생성자
      * 
      * @param <T>
-     *            {@link List}에 포함되어 있는 객체
+     *            {@link Iterable}에 포함되어 있는 객체
      * @param iterable
      *            객체 정보를 담고 있는 iterable
      * @return {@link ListResultConverter}
@@ -67,6 +67,22 @@ public class ListResultConverter<R extends Result<List<T>>, T> {
         iterable.forEach(list::add);
 
         return new ListResultConverter<>(Result.ok(list));
+    }
+
+    /**
+     * list로 생성하는 생성자
+     * 
+     * @param <T>
+     *            {@link List}에 포함되어 있는 객체
+     * @param datas
+     *            객체의 데이터를 담고 있는 List
+     * @return {@link ListResultConverter}
+     * 
+     * @author MJ Youn
+     * @since 2022. 06. 21.
+     */
+    public static <T> ListResultConverter<Result<List<T>>, T> of(List<T> datas) {
+        return new ListResultConverter<>(Result.ok(datas));
     }
 
     /**
