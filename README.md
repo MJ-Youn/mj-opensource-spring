@@ -65,5 +65,8 @@
 ### 0.2.5 - 20220613
 + validated를 위한 marker class 추가
 
-### 0.2.6 - 20220614
+### 0.2.6~0.2.7 - 20220614
 + validated를 위한 marker class를 interface로 변경
+
+### 0.2.8 - 20221216
++ StopWatch 추가 
