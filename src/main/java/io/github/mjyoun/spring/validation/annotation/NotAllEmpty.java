@@ -1,4 +1,4 @@
-package io.github.mjyoun.spring.validation.annotations;
+package io.github.mjyoun.spring.validation.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

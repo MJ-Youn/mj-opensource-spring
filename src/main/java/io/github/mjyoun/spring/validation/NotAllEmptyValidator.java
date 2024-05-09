@@ -15,8 +15,8 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
 
-import io.github.mjyoun.spring.validation.annotations.FieldGrouping;
-import io.github.mjyoun.spring.validation.annotations.NotAllEmpty;
+import io.github.mjyoun.spring.validation.annotation.FieldGrouping;
+import io.github.mjyoun.spring.validation.annotation.NotAllEmpty;
 import lombok.extern.slf4j.Slf4j;
 
 /**

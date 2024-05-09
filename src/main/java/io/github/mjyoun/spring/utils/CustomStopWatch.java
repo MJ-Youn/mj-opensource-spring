@@ -102,7 +102,7 @@ public class CustomStopWatch extends StopWatch {
      */
     @Override
     public String prettyPrint() {
-        StringBuilder sb = new StringBuilder(shortSummary());
+        StringBuilder sb = new StringBuilder("\n" + shortSummary());
 
         NumberFormat pf = NumberFormat.getPercentInstance();
         pf.setMinimumIntegerDigits(3);
