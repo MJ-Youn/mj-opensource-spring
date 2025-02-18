@@ -76,3 +76,9 @@
 
 ### 0.3.1 - 20240509
 + StopWatch의 출력 모양 변경
+
+### 0.3.2 - 20250218
+ - 배포 library 변경 
+  + nexus-staging-maven-plugin -> central-publishing-maven-plugin
+  + repository 위치 변경 (ossrh -> central)
+  + license, developer info 추가
