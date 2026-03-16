@@ -82,3 +82,8 @@
   + nexus-staging-maven-plugin -> central-publishing-maven-plugin
   + repository 위치 변경 (ossrh -> central)
   + license, developer info 추가
+
+### 25.4.7-20260316.0 - 20260316
+ - java 버전 변경 (21 -> 25)
+ - spring-boot 버전 변경 (3.2.5 -> 4.0.3)
+ - spring-data-jdbc 버전 변경 (3.2.5 -> 4.0.3)

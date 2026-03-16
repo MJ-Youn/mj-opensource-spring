@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,7 +20,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import io.github.mjyoun.core.data.Result;
 import io.github.mjyoun.spring.entity.GenericEntity;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * {@link JdbcTemplate} 사용을 위한 repository
@@ -26,8 +27,9 @@ import lombok.extern.slf4j.Slf4j;
  * @author MJ Youn
  * @since 2021. 12. 27.
  */
-@Slf4j
 public abstract class GenericRepository {
+
+    protected static final Logger logger = LoggerFactory.getLogger(GenericRepository.class);
 
     /** Query를 properties로 부터 가져오기 위한 Message Source */
     private ReloadableResourceBundleMessageSource messageSource;
@@ -115,7 +117,7 @@ public abstract class GenericRepository {
                 .append(sql) //
                 .append(this.createPagenationPostFixQuery(pageable));
 
-        log.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
+        logger.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
 
         return this.findAll(t, sb.toString(), args);
     }
@@ -229,7 +231,7 @@ public abstract class GenericRepository {
                 .append(this.createPagenationPostFixQuery(pageable)) //
                 .toString();
 
-        log.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
+        logger.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
 
         return this.findAllInDatas(t, queryWithPageable, paramsMap);
     }
@@ -285,7 +287,7 @@ public abstract class GenericRepository {
                 .append(this.createPagenationPostFixQuery(pageable)) //
                 .toString();
 
-        log.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
+        logger.debug("Pageable: {}", this.createPagenationPostFixQuery(pageable));
 
         return this.findAllIdInDatas(k, queryWithPageable, paramsMap);
     }

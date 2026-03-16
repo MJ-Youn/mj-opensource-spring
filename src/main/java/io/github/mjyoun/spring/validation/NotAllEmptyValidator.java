@@ -9,15 +9,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-import javax.validation.constraints.NotNull;
-
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.github.mjyoun.spring.validation.annotation.FieldGrouping;
 import io.github.mjyoun.spring.validation.annotation.NotAllEmpty;
-import lombok.extern.slf4j.Slf4j;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.constraints.NotNull;
+
 
 /**
  * 여러 개의 field 중에 하나 이상 값이 들어올 수 있도록 설정하기 위한 validator
@@ -27,8 +28,9 @@ import lombok.extern.slf4j.Slf4j;
  * @author MJ Youn
  * @since 2022. 01. 10.
  */
-@Slf4j
 public class NotAllEmptyValidator implements ConstraintValidator<NotAllEmpty, Object> {
+
+    protected static final Logger logger = LoggerFactory.getLogger(NotAllEmptyValidator.class);
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
@@ -64,7 +66,7 @@ public class NotAllEmptyValidator implements ConstraintValidator<NotAllEmpty, Ob
 
                     field.setAccessible(defaultAccessible);
                 } catch (IllegalArgumentException | IllegalAccessException e) {
-                    log.error("{}", e);
+                    logger.error("{}", e);
                 }
             }
         }
