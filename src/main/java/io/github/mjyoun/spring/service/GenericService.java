@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import jakarta.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * 서비스 로직에서 사용하는 공통 기능들을 정리한 서비스
