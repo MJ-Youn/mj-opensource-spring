@@ -1,92 +1,122 @@
 # mj-opensource-spring
- - Spring 개발을 진행하면서 필요한 유틸성 기능을 추가 개발하는 유틸용 library
 
+- Spring 개발을 진행하면서 필요한 유틸성 기능을 추가 개발하는 유틸용 library
 
 ## release note
+
 ### 0.1.0 - 20211227
- + DB 개발(`JDBCTemplate`)을 위한 유틸 추가
-   - `GenericEntity`: Entity
-   - `GenericRepository`: Repository 
-   - `PostgreSQLRepository`: PostgreSQL 사용을 위한 Repository
+
+- DB 개발(`JDBCTemplate`)을 위한 유틸 추가
+    - `GenericEntity`: Entity
+    - `GenericRepository`: Repository
+    - `PostgreSQLRepository`: PostgreSQL 사용을 위한 Repository
 
 ### 0.1.1-SNAPSHOT - 20211227
- + JdbcUtils 추가
-   - nullable setter/getter 추가 
-   - `getColumnsStartsWith` 추가
+
+- JdbcUtils 추가
+    - nullable setter/getter 추가
+    - `getColumnsStartsWith` 추가
 
 ### 0.1.1-SNAPSHOT - 20211228
- + GenericService 추가
+
+- GenericService 추가
 
 ### 0.1.2 - 20220110
-+ optional validation 기능 추가
+
+- optional validation 기능 추가
 
 ### 0.1.3 - 20220110
-+ GenericRepository 고도화
-  - Parameter Map을 통한 데이터 조회 기능 개발 
+
+- GenericRepository 고도화
+    - Parameter Map을 통한 데이터 조회 기능 개발
 
 ### 0.1.4 - 20220111
-+ ListResultConverter 고도화
-  - page 변환 함수 추가 
+
+- ListResultConverter 고도화
+    - page 변환 함수 추가
 
 ### 0.1.5 - 20220111
-+ GenericRepository 오류 수정
+
+- GenericRepository 오류 수정
 
 ### 0.1.5-SNAPSHOT - 20220111
-+ GenericRepository 오류 수정
+
+- GenericRepository 오류 수정
 
 ### 0.1.6 - 20220117
-+ 배포를 위한 버전 변경
+
+- 배포를 위한 버전 변경
 
 ### 0.1.7 - 20220119
-+ GenericRepository 고도화
+
+- GenericRepository 고도화
 
 ### 0.1.8 - 20220119
-+ JDBCUtils 고도화
-  - inner join 함수 추가 
+
+- JDBCUtils 고도화
+    - inner join 함수 추가
 
 ### 0.1.9 - 20220119
-+ GenericRepository 고도화
-  - execute 함수 추가
+
+- GenericRepository 고도화
+    - execute 함수 추가
 
 ### 0.2.0 - 20220315
-+ MariadbRepository 추가
+
+- MariadbRepository 추가
 
 ### 0.2.1 - 20220315
-+ PageResultConverter에 map() 함수 추가
+
+- PageResultConverter에 map() 함수 추가
 
 ### 0.2.2 - 20220401
-+ jackson library의 버전 문제 수정
+
+- jackson library의 버전 문제 수정
 
 ### 0.2.3 - ?
 
 ### 0.2.4 - 20220609
-+ ListResultConverter에 iterable converter 추가
+
+- ListResultConverter에 iterable converter 추가
 
 ### 0.2.5 - 20220613
-+ validated를 위한 marker class 추가
+
+- validated를 위한 marker class 추가
 
 ### 0.2.6~0.2.7 - 20220614
-+ validated를 위한 marker class를 interface로 변경
+
+- validated를 위한 marker class를 interface로 변경
 
 ### 0.2.8 - 20221216
-+ StopWatch 추가 
+
+- StopWatch 추가
 
 ### 0.3.0 - 20240509
-+ StopWatch의 print 정보 변경
+
+- StopWatch의 print 정보 변경
 
 ### 0.3.1 - 20240509
-+ StopWatch의 출력 모양 변경
+
+- StopWatch의 출력 모양 변경
 
 ### 0.3.2 - 20250218
- - 배포 library 변경 
-  + nexus-staging-maven-plugin -> central-publishing-maven-plugin
-  + repository 위치 변경 (ossrh -> central)
-  + license, developer info 추가
+
+- 배포 library 변경
+
+* nexus-staging-maven-plugin -> central-publishing-maven-plugin
+* repository 위치 변경 (ossrh -> central)
+* license, developer info 추가
 
 ### 25.4.7-20260316.0 - 20260316
- - java 버전 변경 (21 -> 25)
- - spring-boot 버전 변경 (3.2.5 -> 4.0.3)
- - spring-data-jdbc 버전 변경 (3.2.5 -> 4.0.3)
+
+- java 버전 변경 (21 -> 25)
+- spring-boot 버전 변경 (3.2.5 -> 4.0.3)
+- spring-data-jdbc 버전 변경 (3.2.5 -> 4.0.3)
 
 ### 25.4.7-20260428.0 - 20260428
- -jackson library 버전 변경 (2.13.1 -> 3.1.2)
+
+-jackson library 버전 변경 (2.13.1 -> 3.1.2)
+
+### 25.4.7-20260428.1 - 20260428
+
+- pom.xml 수정 (description)
