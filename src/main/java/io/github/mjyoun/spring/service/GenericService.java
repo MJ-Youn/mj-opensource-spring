@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import jakarta.validation.constraints.NotNull;
-import tools.jackson.databind.ObjectMapper;
+
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * 서비스 로직에서 사용하는 공통 기능들을 정리한 서비스
@@ -15,14 +16,14 @@ import tools.jackson.databind.ObjectMapper;
 public class GenericService {
 
     /** model 변경을 위한 Object Mapper */
-    protected ObjectMapper objectMapper;
+    protected final JsonMapper jsonMapper;
 
     /**
-     * @param objectMapper
-     *            {@link ObjectMapper}
+     * @param jsonMapper
+     *            {@link JsonMapper}
      */
-    protected GenericService(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    protected GenericService(JsonMapper jsonMapper) {
+        this.jsonMapper = jsonMapper;
     }
 
     /**
@@ -37,7 +38,6 @@ public class GenericService {
      * @param destClass
      *            destination class
      * @return destination object list
-     * 
      * @author MJ Youn
      * @since 2021. 12. 28.
      */
@@ -47,7 +47,7 @@ public class GenericService {
         } else {
             return src //
                     .stream() //
-                    .map(s -> this.objectMapper.convertValue(s, destClass)) //
+                    .map(s -> this.jsonMapper.convertValue(s, destClass)) //
                     .collect(Collectors.toList());
         }
     }

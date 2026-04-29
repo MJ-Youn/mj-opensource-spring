@@ -120,3 +120,8 @@
 ### 25.4.7-20260428.1 - 20260428
 
 - pom.xml 수정 (description)
+
+### 25.4.7-20260429.0 - 20260429
+
+- ObjectMapper -> JsonMapper
+- version 변경
