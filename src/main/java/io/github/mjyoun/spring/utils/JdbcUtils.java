@@ -14,7 +14,7 @@ import java.util.Map;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -39,13 +39,14 @@ public class JdbcUtils {
      * @param type
      *            data type
      * @throws SQLException
-     *             if parameterIndex does not correspond to a parameter marker in the SQL statement; if a database access error occurs or this method
-     *             is called on a closed <code>PreparedStatement</code>.
-     * 
+     *             if parameterIndex does not correspond to a parameter marker in the SQL statement;
+     *             if a database access error occurs or this method is called on a closed
+     *             <code>PreparedStatement</code>.
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
-    public static <T> void setPreparedStatement(@NotNull PreparedStatement ps, @Min(1) int index, T data, Class<T> type) throws SQLException {
+    public static <T> void setPreparedStatement(@NotNull PreparedStatement ps, @Min(1) int index, T data, Class<T> type)
+            throws SQLException {
         if (data == null) {
             ps.setNull(index, Types.NULL);
         } else {
@@ -71,7 +72,6 @@ public class JdbcUtils {
      * @param columnName
      *            조회할 컬럼 이름
      * @return 컬럼에 해당하는 값. 존재하지 않는 컬럼일 경우 Null
-     * 
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
@@ -91,7 +91,6 @@ public class JdbcUtils {
      * @param columnName
      *            조회할 컬럼 이름
      * @return 컬럼에 해당하는 값. 존재하지 않는 컬럼일 경우 Null
-     * 
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
@@ -112,7 +111,6 @@ public class JdbcUtils {
      * @param columnName
      *            조회할 컬럼 이름
      * @return 컬럼에 해당하는 값. 존재하지 않는 컬럼일 경우 Null
-     * 
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
@@ -133,7 +131,6 @@ public class JdbcUtils {
      * @param columnName
      *            조회할 컬럼 이름
      * @return 컬럼에 해당하는 값. 존재하지 않는 컬럼일 경우 Null
-     * 
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
@@ -154,7 +151,6 @@ public class JdbcUtils {
      * @param columnName
      *            조회할 컬럼 이름
      * @return 컬럼에 해당하는 값. 존재하지 않는 컬럼일 경우 Null
-     * 
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
@@ -175,7 +171,6 @@ public class JdbcUtils {
      * @param columnName
      *            조회할 컬럼 이름
      * @return 컬럼에 해당하는 값. 존재하지 않는 컬럼일 경우 Null
-     * 
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
@@ -198,11 +193,11 @@ public class JdbcUtils {
      * @return 컬럼/값 맵핑 정보
      * @throws SQLException
      *             if a database access error occurs or this method is called on a closed result set
-     * 
      * @author MJ Youn
      * @since 2021. 12. 27.
      */
-    public static Map<String, Object> getColumnsStartsWith(@NotNull ResultSet rs, @NotNull String startsWith) throws SQLException {
+    public static Map<String, Object> getColumnsStartsWith(@NotNull ResultSet rs, @NotNull String startsWith)
+            throws SQLException {
         Map<String, Object> datas = new HashMap<>();
         ResultSetMetaData meta = rs.getMetaData();
         // ResultSet 결과로 조회된 컬럼 개수
@@ -213,7 +208,7 @@ public class JdbcUtils {
             String columnName = meta.getColumnName(i + 1);
 
             // 특정 문자열로 시작하는 column을 모음
-            if (StringUtils.startsWithIgnoreCase(columnName, startsWith)) {
+            if (Strings.CI.startsWith(columnName, startsWith)) {
                 datas.put(columnName, JdbcUtils.getString(rs, columnName));
             }
         }
@@ -227,7 +222,6 @@ public class JdbcUtils {
      * @param queries
      *            쿼리 목록
      * @return inner join한 쿼리
-     * 
      * @author MJ Youn
      * @since 2022. 01. 19.
      */
@@ -261,7 +255,6 @@ public class JdbcUtils {
      * @param queries
      *            쿼리 목록
      * @return inner join한 쿼리
-     * 
      * @author MJ Youn
      * @since 2022. 01. 19.
      */

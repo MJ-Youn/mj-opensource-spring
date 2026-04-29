@@ -125,3 +125,7 @@
 
 - ObjectMapper -> JsonMapper
 - version 변경
+
+### 25.4.7-20260429.1 - 20260429
+
+- 오류수정

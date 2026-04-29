@@ -33,7 +33,6 @@ public class CustomStopWatch extends StopWatch {
      * 
      * @param id
      *            stopwatch 이름. print시 사용됨
-     * 
      * @author MJ Youn
      * @since 2024. 05. 09.
      */
@@ -48,7 +47,6 @@ public class CustomStopWatch extends StopWatch {
      *            stopwatch 이름. print시 사용됨
      * @param timeFormat
      *            시간 출력 포맷
-     * 
      * @author MJ Youn
      * @since 2024. 05. 09.
      */
@@ -63,7 +61,6 @@ public class CustomStopWatch extends StopWatch {
      * 
      * @param timeFormat
      *            타임 포맷. {@link TimeUtils}
-     * 
      * @author MJ Youn
      * @since 2024. 05. 09.
      */
@@ -75,17 +72,15 @@ public class CustomStopWatch extends StopWatch {
      * time을 string 포맷에 맞게 출력
      * 
      * @return 포매팅된 time string
-     * 
      * @author MJ Youn
      * @since 2022. 12. 16.
      */
     public String printLastTaskTimeNanos() {
-        return this.printNano(this.getLastTaskTimeNanos());
+        return this.printNano(this.lastTaskInfo().getTimeNanos());
     }
 
     /**
      * @see StopWatch#shortSummary()
-     * 
      * @author MJ Youn
      * @since 2024. 05. 09.
      */
@@ -96,7 +91,6 @@ public class CustomStopWatch extends StopWatch {
 
     /**
      * @see StopWatch#prettyPrint()
-     * 
      * @author MJ Youn
      * @since 2024. 05. 09.
      */
@@ -134,7 +128,6 @@ public class CustomStopWatch extends StopWatch {
      * @param nano
      *            nano second
      * @return nano second를 보기 좋게 출력
-     * 
      * @author MJ Youn
      * @since 2024. 05. 09.
      */

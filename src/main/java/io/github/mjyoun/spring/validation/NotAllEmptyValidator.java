@@ -9,22 +9,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.github.mjyoun.spring.validation.annotation.FieldGrouping;
 import io.github.mjyoun.spring.validation.annotation.NotAllEmpty;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
-import jakarta.validation.constraints.NotNull;
-
 
 /**
  * 여러 개의 field 중에 하나 이상 값이 들어올 수 있도록 설정하기 위한 validator
  * 
  * @see NotAllEmpty
- * 
  * @author MJ Youn
  * @since 2022. 01. 10.
  */
@@ -52,7 +51,7 @@ public class NotAllEmptyValidator implements ConstraintValidator<NotAllEmpty, Ob
                 String[] groupNames = annotationInfo.groupNames();
 
                 // field data를 가져오기 위한 accessible 설정
-                Boolean defaultAccessible = field.isAccessible();
+                Boolean defaultAccessible = field.canAccess(value);
                 field.setAccessible(true);
 
                 try {
@@ -117,11 +116,11 @@ public class NotAllEmptyValidator implements ConstraintValidator<NotAllEmpty, Ob
      *            추가할 group 이름 목록
      * @param hasData
      *            그룹의 데이터 존재 여부
-     * 
      * @author MJ Youn
      * @since 2022. 01. 10.
      */
-    private void setHasDataInGroups(@NotNull Map<String, Boolean> groupMap, @NotNull String[] groupNames, Boolean hasData) {
+    private void setHasDataInGroups(@NotNull Map<String, Boolean> groupMap, @NotNull String[] groupNames,
+            Boolean hasData) {
         // 그룹 이름 목록으로 맵을 돌면서 확인함
         for (String group : groupNames) {
             Boolean prevHasData = groupMap.get(group);
